@@ -1,105 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AI Image Generator</title>
+try {
+  const betterPrompt = `
+  high quality, ultra realistic, 4k, detailed image of ${prompt}, 
+  centered subject, clear composition, professional photography style
+  `;
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 20px;
-      background: #111;
-      color: white;
-    }
+  const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(betterPrompt)}`;
 
-    h1 {
-      margin-top: 10px;
-      font-size: 24px;
-    }
+  await new Promise(r => setTimeout(r, 1500));
 
-    input {
-      width: 90%;
-      padding: 12px;
-      margin-top: 20px;
-      border-radius: 8px;
-      border: none;
-      outline: none;
-      font-size: 16px;
-    }
+  img.src = url;
 
-    button {
-      width: 90%;
-      padding: 12px;
-      margin-top: 10px;
-      border: none;
-      border-radius: 8px;
-      background: #4CAF50;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #45a049;
-    }
-
-    #status {
-      margin-top: 10px;
-      font-size: 14px;
-      color: #bbb;
-    }
-
-    img {
-      margin-top: 20px;
-      width: 100%;
-      max-width: 400px;
-      border-radius: 12px;
-      display: none;
-    }
-  </style>
-</head>
-
-<body>
-
-  <h1>AI Image Generator</h1>
-
-  <input id="prompt" placeholder="Type your prompt..." />
-  <button onclick="generateImage()">Generate</button>
-
-  <div id="status"></div>
-
-  <img id="result" />
-
-  <script>
-    function generateImage() {
-      const prompt = document.getElementById("prompt").value.trim();
-      const img = document.getElementById("result");
-      const status = document.getElementById("status");
-
-      if (!prompt) {
-        status.innerText = "Please enter a prompt.";
-        return;
-      }
-
-      status.innerText = "Generating image...";
-      img.style.display = "none";
-
-      const url = "https://image.pollinations.ai/prompt/" + encodeURIComponent(prompt);
-
-      img.onload = () => {
-        status.innerText = "Done!";
-        img.style.display = "block";
-      };
-
-      img.onerror = () => {
-        status.innerText = "Failed to load image. Try again.";
-      };
-
-      img.src = url;
-    }
-  </script>
-
-</body>
-</html>
+} catch (error) {
+  alert("Failed to generate image. Try again.");
+  console.log(error);
+}
